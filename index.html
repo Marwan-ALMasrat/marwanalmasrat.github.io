@@ -21,7 +21,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* REMOVED scroll-behavior: smooth from html to prevent auto-scroll on mobile load */
 
 body {
   background: var(--bg);
@@ -100,6 +100,7 @@ nav {
   font-size: 0.75rem; letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--muted);
   text-decoration: none; transition: color 0.3s;
+  cursor: pointer;
 }
 .nav-links a:hover { color: var(--accent); }
 
@@ -131,37 +132,46 @@ nav {
   opacity: 0;
   animation: fadeUp 0.8s 0.4s forwards;
   display: block;
-  /* Responsive */
   font-size: clamp(3.2rem, 9vw, 7rem);
 }
 
-/* First name: white + electric effect */
+/* First name: white — NO animation that hides it, only glow */
 .hero-name .name-first {
   display: block;
   color: #fff;
   position: relative;
   width: fit-content;
-}
-
-/* Electric text effect on first name */
-.hero-name .name-first {
-  animation: fadeUp 0.8s 0.4s forwards, electricFlicker 0.08s 1.2s 8 ease-in-out;
+  /* Subtle permanent electric glow — name always visible */
   text-shadow:
-    0 0 8px rgba(0,210,255,0.9),
-    0 0 20px rgba(0,210,255,0.5),
-    0 0 40px rgba(0,210,255,0.2);
+    0 0 8px rgba(0,210,255,0.4),
+    0 0 16px rgba(0,210,255,0.15);
 }
 
-/* After flicker settles, maintain subtle glow */
-@keyframes electricFlicker {
-  0%  { text-shadow: 0 0 4px rgba(0,210,255,1), 0 0 12px rgba(0,210,255,0.8), 0 0 30px rgba(0,210,255,0.5), 2px 0 0 rgba(0,210,255,0.4), -2px 0 0 rgba(123,47,255,0.3); color: #e0f8ff; }
-  15% { text-shadow: 0 0 0px rgba(0,210,255,0), 0 0 0px rgba(0,210,255,0); color: #fff; }
-  30% { text-shadow: 0 0 6px rgba(0,210,255,1), 0 0 20px rgba(0,210,255,0.9), 0 0 50px rgba(0,210,255,0.6), -3px 0 0 rgba(0,210,255,0.5), 3px 0 0 rgba(123,47,255,0.4); color: #c8f4ff; letter-spacing: -0.02em; }
-  45% { text-shadow: none; color: #fff; letter-spacing: -0.03em; }
-  60% { text-shadow: 0 0 8px rgba(0,210,255,0.9), 0 0 25px rgba(0,210,255,0.7), 4px 0 0 rgba(0,210,255,0.3), -4px 0 0 rgba(255,47,123,0.2); color: #ddf8ff; }
-  75% { text-shadow: none; color: #fff; }
-  90% { text-shadow: 0 0 3px rgba(0,210,255,0.6), 0 0 10px rgba(0,210,255,0.3); color: #f0fbff; }
-  100%{ text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); color: #fff; }
+/* Electric glow pulse on page load — name stays white, only glow animates */
+@keyframes electricGlowIn {
+  0%   { text-shadow: none; }
+  20%  { text-shadow: 0 0 15px rgba(0,210,255,1), 0 0 35px rgba(0,210,255,0.8), 0 0 70px rgba(0,210,255,0.4); }
+  40%  { text-shadow: 0 0 4px rgba(0,210,255,0.5); }
+  60%  { text-shadow: 0 0 20px rgba(0,210,255,0.9), 0 0 45px rgba(0,210,255,0.6); }
+  80%  { text-shadow: 0 0 5px rgba(0,210,255,0.5); }
+  100% { text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); }
+}
+
+.hero-name .name-first.electric-init {
+  animation: electricGlowIn 0.8s ease-in-out forwards;
+}
+
+/* Electric hover on first name — glow only, color stays white */
+@keyframes electricPulse {
+  0%   { text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); }
+  20%  { text-shadow: 0 0 15px rgba(0,210,255,1), 0 0 35px rgba(0,210,255,0.8), 0 0 70px rgba(0,210,255,0.4), 4px 0 0 rgba(0,210,255,0.5), -4px 0 0 rgba(123,47,255,0.4); }
+  40%  { text-shadow: 0 0 4px rgba(0,210,255,0.5); }
+  60%  { text-shadow: 0 0 20px rgba(0,210,255,0.9), 0 0 45px rgba(0,210,255,0.6), -3px 0 0 rgba(255,47,123,0.3); }
+  80%  { text-shadow: 0 0 5px rgba(0,210,255,0.5); }
+  100% { text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); }
+}
+.hero-name .name-first.electric-hover {
+  animation: electricPulse 0.6s ease-in-out forwards;
 }
 
 /* Electric spark canvas overlay on first name */
@@ -176,6 +186,8 @@ nav {
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 10;
+  /* Canvas sits behind text so name is always readable */
+  mix-blend-mode: screen;
 }
 
 /* Second line: family name — gradient like old version */
@@ -188,7 +200,7 @@ nav {
   width: fit-content;
 }
 
-/* Glitch on hover — family name only, matching old version */
+/* Glitch on hover — family name only */
 .hero-name:hover .name-last {
   animation: glitch 0.5s steps(2) forwards;
 }
@@ -198,19 +210,6 @@ nav {
   50% { text-shadow: 2px 2px var(--accent2); clip-path: inset(60% 0 10% 0); }
   75% { text-shadow: -1px -1px var(--accent3); clip-path: inset(5% 0 80% 0); }
   100%{ text-shadow: none; clip-path: none; }
-}
-
-/* Electric hover on first name */
-.hero-name:hover .name-first {
-  animation: electricPulse 0.6s ease-in-out;
-}
-@keyframes electricPulse {
-  0%  { text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); color: #fff; }
-  20% { text-shadow: 0 0 15px rgba(0,210,255,1), 0 0 35px rgba(0,210,255,0.8), 0 0 70px rgba(0,210,255,0.4), 4px 0 0 rgba(0,210,255,0.5), -4px 0 0 rgba(123,47,255,0.4); color: #c0f2ff; letter-spacing: -0.02em; }
-  40% { text-shadow: none; color: #fff; letter-spacing: -0.03em; }
-  60% { text-shadow: 0 0 20px rgba(0,210,255,0.9), 0 0 45px rgba(0,210,255,0.6), -3px 0 0 rgba(255,47,123,0.3); color: #d8f9ff; }
-  80% { text-shadow: 0 0 5px rgba(0,210,255,0.5); color: #fff; }
-  100%{ text-shadow: 0 0 8px rgba(0,210,255,0.4), 0 0 16px rgba(0,210,255,0.15); color: #fff; }
 }
 
 .hero-sub {
@@ -466,11 +465,11 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#">Marwan Al-Masrat</a>
+    <a class="nav-logo" href="#hero">Marwan Al-Masrat</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" onclick="smoothScroll(event,'about')">About</a></li>
+      <li><a href="#projects" onclick="smoothScroll(event,'projects')">Projects</a></li>
+      <li><a href="#contact" onclick="smoothScroll(event,'contact')">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -778,6 +777,26 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 </footer>
 
 <script>
+/* ─── SMOOTH SCROLL — JS only, no CSS scroll-behavior ─── */
+function smoothScroll(e, id) {
+  e.preventDefault();
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ─── FORCE SCROLL TO TOP ON LOAD ──────────────── */
+// Prevent browser from restoring scroll position
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+});
+// Belt-and-suspenders: also on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+});
+
 /* ─── CURSOR ─────────────────────────────────── */
 const cursorDot  = document.getElementById('cursorDot');
 const cursorRing = document.getElementById('cursorRing');
@@ -874,7 +893,7 @@ animate();
 /* ─── ELECTRIC LIGHTNING ON FIRST NAME ───────── */
 const elCanvas = document.getElementById('electric-canvas');
 const elCtx    = elCanvas.getContext('2d');
-const nameFirstEl = document.querySelector('.name-first');
+const nameFirstEl   = document.querySelector('.name-first');
 const nameFirstWrap = document.querySelector('.name-first-wrap');
 
 function resizeElectricCanvas(){
@@ -887,12 +906,8 @@ function resizeElectricCanvas(){
   elCanvas.style.top  = '-40px';
 }
 
-// Lightning bolt path generator
 function lightningSeg(x1,y1,x2,y2,displacement,detail){
-  if(detail < 1){
-    elCtx.lineTo(x2,y2);
-    return;
-  }
+  if(detail < 1){ elCtx.lineTo(x2,y2); return; }
   const midX = (x1+x2)/2 + (Math.random()-.5)*displacement;
   const midY = (y1+y2)/2 + (Math.random()-.5)*displacement;
   lightningSeg(x1,y1,midX,midY,displacement/2,detail-1);
@@ -915,7 +930,7 @@ function drawLightning(x1,y1,x2,y2,color,lineWidth){
 
 let electricActive = false;
 let electricFrame  = 0;
-const ELECTRIC_DURATION = 48; // frames
+const ELECTRIC_DURATION = 48;
 
 function runElectric(){
   if(!electricActive) return;
@@ -924,44 +939,34 @@ function runElectric(){
 
   const cW = elCanvas.width;
   const cH = elCanvas.height;
-  const cx = cW/2; // center x
-  const cy = cH/2; // center y
+  const cx = cW/2;
+  const cy = cH/2;
 
   const progress = electricFrame / ELECTRIC_DURATION;
   const fade = progress < 0.6 ? 1 : 1 - (progress-0.6)/0.4;
 
-  // Draw 2-4 bolts per frame randomly around the text
   const boltCount = 2 + Math.floor(Math.random()*3);
   for(let b=0; b<boltCount; b++){
-    // Start from random edge point
     const side = Math.floor(Math.random()*4);
     let sx, sy, ex, ey;
     if(side===0){ sx=Math.random()*cW; sy=0; }
     else if(side===1){ sx=cW; sy=Math.random()*cH; }
     else if(side===2){ sx=Math.random()*cW; sy=cH; }
     else { sx=0; sy=Math.random()*cH; }
-    // End near text region
     ex = cx + (Math.random()-.5)*cW*0.5;
     ey = cy + (Math.random()-.5)*cH*0.5;
 
     const hue = Math.random()<0.7 ? 'rgba(0,210,255,' : 'rgba(123,47,255,';
     elCtx.globalAlpha = fade * (0.5 + Math.random()*0.5);
     drawLightning(sx,sy,ex,ey, hue+'0.9)', 0.8+Math.random()*1.5);
-    // Bright core
     drawLightning(sx,sy,ex,ey, 'rgba(220,245,255,0.6)', 0.3);
   }
 
-  // Occasional branching spark from center outward
   if(Math.random()<0.4){
     const angle = Math.random()*Math.PI*2;
     const len   = 30 + Math.random()*cW*0.25;
     elCtx.globalAlpha = fade * 0.6;
-    drawLightning(
-      cx, cy,
-      cx + Math.cos(angle)*len,
-      cy + Math.sin(angle)*len,
-      'rgba(0,230,255,0.7)', 0.5
-    );
+    drawLightning(cx, cy, cx + Math.cos(angle)*len, cy + Math.sin(angle)*len, 'rgba(0,230,255,0.7)', 0.5);
   }
 
   if(electricFrame < ELECTRIC_DURATION){
@@ -978,18 +983,35 @@ function triggerElectric(){
   if(electricActive) return;
   electricActive = true;
   electricFrame  = 0;
+
+  /* Glow animation on text — class swap, no color change */
+  nameFirstEl.classList.remove('electric-init','electric-hover');
+  void nameFirstEl.offsetWidth; // reflow
+  nameFirstEl.classList.add('electric-hover');
+  nameFirstEl.addEventListener('animationend', () => {
+    nameFirstEl.classList.remove('electric-hover');
+  }, { once: true });
+
   runElectric();
 }
 
-// Trigger on page load after 1.2s (matches CSS animation delay)
+/* On load: trigger electric + glow init */
 window.addEventListener('load', () => {
   setTimeout(() => {
     resizeElectricCanvas();
-    triggerElectric();
+    /* Init glow pulse */
+    nameFirstEl.classList.add('electric-init');
+    nameFirstEl.addEventListener('animationend', () => {
+      nameFirstEl.classList.remove('electric-init');
+    }, { once: true });
+    /* Sparks */
+    electricActive = true;
+    electricFrame  = 0;
+    runElectric();
   }, 1200);
 });
 
-// Trigger on hover
+/* Hover triggers */
 nameFirstEl.addEventListener('mouseenter', triggerElectric);
 nameFirstWrap.addEventListener('mouseenter', triggerElectric);
 

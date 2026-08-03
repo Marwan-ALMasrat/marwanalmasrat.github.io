@@ -16,7 +16,7 @@
   --accent2: #7b2fff;
   --accent3: #ff2f7b;
   --text: #e8f0ff;
-  --muted: #5a7090;
+  --muted: #7186a5;
   --glow: 0 0 30px rgba(0,210,255,0.25);
   --glow2: 0 0 30px rgba(123,47,255,0.25);
 }
@@ -28,7 +28,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   overflow-x: hidden;
   cursor: none;
 }
@@ -104,15 +104,20 @@ nav {
   cursor: pointer;
 }
 .nav-links a:hover { color: var(--accent); }
+.nav-links a.nav-resume {
+  padding: 0.38rem 0.72rem; margin-top: -0.38rem; border: 1px solid rgba(0,210,255,0.26);
+  border-radius: 7px; color: var(--accent); background: rgba(0,210,255,0.055);
+}
+.nav-links a.nav-resume:hover { border-color: rgba(0,210,255,0.55); background: rgba(0,210,255,0.11); box-shadow: 0 0 20px rgba(0,210,255,0.12); }
 
 /* ── HERO ── */
 #hero {
-  min-height: 100vh;
+  min-height: min(900px, 94vh);
   display: flex; align-items: center;
-  padding: 8rem 0 4rem;
+  padding: 7rem 0 3.5rem;
   position: relative;
 }
-.hero-content { max-width: 860px; }
+.hero-content { max-width: 920px; }
 
 .hero-tag {
   font-family: 'Space Mono', monospace;
@@ -133,7 +138,7 @@ nav {
   opacity: 0;
   animation: fadeUp 0.8s 0.4s forwards;
   display: block;
-  font-size: clamp(3.2rem, 9vw, 7rem);
+  font-size: clamp(2.75rem, 6.5vw, 5.2rem);
 }
 
 /* First name: white — NO animation that hides it, only glow */
@@ -214,16 +219,16 @@ nav {
 }
 
 .hero-sub {
-  margin-top: 2rem;
-  font-size: clamp(0.88rem, 2vw, 1.05rem);
+  margin-top: 1.55rem;
+  font-size: clamp(0.92rem, 1.6vw, 1.04rem);
   line-height: 1.75;
-  color: rgba(232,240,255,0.65);
-  max-width: 560px;
+  color: rgba(232,240,255,0.74);
+  max-width: 690px;
   opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
 }
 
 .hero-chips {
-  margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-top: 1.45rem; display: flex; flex-wrap: wrap; gap: 0.6rem;
   opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
 }
 .chip {
@@ -238,24 +243,24 @@ nav {
 
 /* ── CV DOWNLOAD BUTTON ── */
 .cv-download {
-  margin-top: 2rem;
+  margin-top: 0;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
-  padding: 0.8rem 1.8rem;
+  min-height: 46px;
+  padding: 0.8rem 1.55rem;
   background: linear-gradient(135deg, rgba(0,210,255,0.12), rgba(123,47,255,0.12));
   border: 1px solid rgba(0,210,255,0.4);
   border-radius: 8px;
   color: var(--accent);
   text-decoration: none;
   font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  animation: fadeUp 0.8s 1s forwards;
   transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
   cursor: pointer;
 }
@@ -288,8 +293,35 @@ nav {
   50% { transform: scale(1.03); opacity: 1; }
 }
 
+.hero-actions {
+  margin-top: 1.7rem; display: flex; flex-wrap: wrap; gap: 0.75rem;
+  opacity: 0; animation: fadeUp 0.8s 1s forwards;
+}
+.hero-projects-link {
+  min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem;
+  padding: 0.8rem 1.45rem; border: 1px solid rgba(232,240,255,0.17); border-radius: 8px;
+  background: rgba(5,12,26,0.62); color: rgba(232,240,255,0.82); text-decoration: none;
+  font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.13em; text-transform: uppercase;
+  transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+}
+.hero-projects-link:hover {
+  color: #fff; border-color: rgba(123,47,255,0.55); background: rgba(123,47,255,0.1);
+  transform: translateY(-2px); box-shadow: 0 10px 30px rgba(123,47,255,0.13);
+}
+.hero-contacts {
+  margin-top: 0.95rem; display: flex; flex-wrap: wrap; gap: 0.5rem;
+  opacity: 0; animation: fadeUp 0.8s 1.15s forwards;
+}
+.hero-contact-link {
+  min-height: 34px; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.43rem 0.68rem;
+  border: 1px solid rgba(232,240,255,0.11); border-radius: 7px; background: rgba(5,12,26,0.45);
+  color: var(--muted); text-decoration: none; font-family: 'Space Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.08em; transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.hero-contact-link:hover { color: var(--accent); border-color: rgba(0,210,255,0.32); background: rgba(0,210,255,0.065); }
+
 .hero-scroll {
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex; align-items: center; gap: 1rem;
   opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
 }
@@ -302,7 +334,7 @@ nav {
 .scroll-label { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); }
 
 /* ── SECTIONS ── */
-section { padding: 7rem 0; position: relative; z-index: 2; }
+section { padding: 6rem 0; position: relative; z-index: 2; }
 
 .section-header { margin-bottom: 4rem; opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
 .section-header.visible { opacity: 1; transform: translateY(0); }
@@ -318,10 +350,14 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
 }
+.section-summary {
+  max-width: 720px; margin-top: 1.15rem; font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.75; color: rgba(232,240,255,0.68);
+}
 
 /* ── ABOUT ── */
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.about-text p { font-size: clamp(0.9rem, 1.8vw, 1.05rem); line-height: 1.85; color: rgba(232,240,255,0.7); margin-bottom: 1.2rem; }
+.about-text p { font-size: clamp(0.9rem, 1.8vw, 1.05rem); line-height: 1.85; color: rgba(232,240,255,0.76); margin-bottom: 1.2rem; }
 .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 .stat-card {
   padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px;
@@ -357,7 +393,7 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
 }
 .phase-desc {
   max-width: 760px; margin: -0.65rem 0 1.8rem 1.35rem;
-  color: rgba(232,240,255,0.55); font-size: 0.86rem; line-height: 1.7;
+  color: rgba(232,240,255,0.65); font-size: 0.86rem; line-height: 1.7;
 }
 .cat-label {
   font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -391,7 +427,7 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
 .project-card.purple .project-number { color: #b997ff; }
 .project-card.purple .project-number::after { background: linear-gradient(90deg, var(--accent2), transparent); }
 .project-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-.project-desc { flex: 1; font-size: 0.85rem; line-height: 1.6; color: rgba(232,240,255,0.55); margin-bottom: 1rem; }
+.project-desc { flex: 1; font-size: 0.85rem; line-height: 1.6; color: rgba(232,240,255,0.68); margin-bottom: 1rem; }
 .project-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 .skill-tag {
   font-family: 'Space Mono', monospace; font-size: 0.6rem; padding: 0.2rem 0.5rem;
@@ -444,7 +480,7 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
 
 /* ── CONTACT ── */
 .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-.contact-left p { font-size: clamp(0.88rem, 1.8vw, 1.05rem); line-height: 1.8; color: rgba(232,240,255,0.6); margin-bottom: 2rem; }
+.contact-left p { font-size: clamp(0.9rem, 1.6vw, 1.02rem); line-height: 1.8; color: rgba(232,240,255,0.72); margin-bottom: 2rem; }
 .contact-links { display: flex; flex-direction: column; gap: 1rem; }
 .contact-item {
   display: flex; align-items: center; gap: 1rem; padding: 1.2rem 1.5rem;
@@ -485,17 +521,24 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 
 /* ── RESPONSIVE ── */
 @media(max-width: 768px){
+  #hero { min-height: auto; padding: 7.3rem 0 4rem; }
   .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
   .contact-visual { display: none; }
   .project-grid { grid-template-columns: 1fr; }
   .phase-title { align-items: flex-start; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
-  .hero-name { font-size: clamp(2.8rem, 11vw, 4rem); }
+  .hero-name { font-size: clamp(2.55rem, 9.5vw, 3.65rem); }
 }
 @media(max-width: 480px){
-  .hero-name { font-size: clamp(2.2rem, 10vw, 3rem); }
-  .cv-download { font-size: 0.6rem; padding: 0.7rem 1.2rem; }
+  .container, .nav-inner { padding-left: 1.35rem; padding-right: 1.35rem; }
+  .hero-name { font-size: clamp(2.15rem, 9vw, 2.8rem); }
+  .hero-sub { margin-top: 1.3rem; }
+  .hero-actions { display: grid; grid-template-columns: 1fr; }
+  .cv-download, .hero-projects-link { width: 100%; font-size: 0.61rem; padding: 0.72rem 1rem; }
+  .hero-contacts { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-contact-link { justify-content: center; min-width: 0; min-height: 40px; padding: 0.5rem 0.4rem; font-size: 0.54rem; }
+  .hero-scroll { display: none; }
   .phase-title { flex-direction: column; gap: 0.35rem; font-size: 1.22rem; }
   .phase-count { font-size: 0.54rem; }
   .project-card { padding: 1.3rem; }
@@ -522,6 +565,7 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
       <li><a href="#about" onclick="smoothScroll(event,'about')">About</a></li>
       <li><a href="#projects" onclick="smoothScroll(event,'projects')">Projects</a></li>
       <li><a href="#contact" onclick="smoothScroll(event,'contact')">Contact</a></li>
+      <li><a class="nav-resume" href="CV/ML%20Engineer%20MarwanCV.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
     </ul>
   </div>
 </nav>
@@ -530,7 +574,7 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <section id="hero">
   <div class="container">
     <div class="hero-content">
-      <div class="hero-tag">AI Engineer · Physicist</div>
+      <div class="hero-tag">AI Engineer &middot; Applied AI Systems</div>
 
       <h1 class="hero-name">
         <!-- Electric effect on first name -->
@@ -543,32 +587,43 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
       </h1>
 
       <p class="hero-sub">
-        AI Engineer building production-minded LLM, RAG, NLP, and computer vision systems - from parameter-efficient fine-tuning and evaluation to vector search, knowledge graphs, APIs, and observability.
+        Physics-trained AI Engineer building measurable, production-minded systems across LLM fine-tuning, RAG, knowledge graphs, NLP, and computer vision - from model evaluation to APIs and observability.
       </p>
 
       <div class="hero-chips">
-        <span class="chip">LoRA / QLoRA</span>
-        <span class="chip">RAG Systems</span>
-        <span class="chip">LLM Evaluation</span>
+        <span class="chip">LLM Fine-Tuning</span>
+        <span class="chip">RAG &amp; Retrieval</span>
         <span class="chip">Knowledge Graphs</span>
+        <span class="chip">Production AI</span>
         <span class="chip">Computer Vision</span>
-        <span class="chip">FastAPI + Docker</span>
       </div>
 
-      <!-- CV Download -->
-      <a
-        class="cv-download"
-        href="CV/ML%20Engineer%20MarwanCV.pdf"
-        target="_blank"
-        download="Marwan_AlMasrat_CV.pdf"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        <span>Download CV</span>
-      </a>
+      <div class="hero-actions">
+        <a
+          class="cv-download"
+          href="CV/ML%20Engineer%20MarwanCV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          download="Marwan_AlMasrat_CV.pdf"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download Resume</span>
+        </a>
+        <a class="hero-projects-link" href="#projects" onclick="smoothScroll(event,'projects')">
+          <span>View Projects</span><span aria-hidden="true">&#8595;</span>
+        </a>
+      </div>
+
+      <div class="hero-contacts" aria-label="Quick contact">
+        <a class="hero-contact-link" href="https://www.linkedin.com/in/marwan-al-masrat" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+        <a class="hero-contact-link" href="https://github.com/Marwan-ALMasrat" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">&#8599;</span></a>
+        <a class="hero-contact-link" href="mailto:masrat.marwan@gmail.com">Email</a>
+        <a class="hero-contact-link" href="tel:+962786834685">+962 78 683 4685</a>
+      </div>
 
       <div class="hero-scroll">
         <div class="scroll-line"></div>
@@ -584,20 +639,20 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <section id="about">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-kicker">About</div>
-      <h2 class="section-title">Applied Artificial Intelligence</h2>
+      <div class="section-kicker">Professional Profile</div>
+      <h2 class="section-title">AI engineering,<br>grounded in first principles</h2>
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I am an AI Engineer and physics graduate from Al-Hussein Bin Talal University in Jordan, bringing first-principles reasoning to applied machine learning systems.</p>
-        <p>I design end-to-end NLP and RAG applications, evaluate and fine-tune transformer models, and build computer vision and predictive ML solutions with measurable outcomes.</p>
-        <p>Through the AI.SPIRE program, I am extending that work into knowledge graphs, FastAPI, Docker, and AI observability for production-grade delivery.</p>
+        <p>Physics-trained AI Engineer focused on end-to-end applied AI: LLM fine-tuning, retrieval-augmented generation, knowledge graphs, NLP, computer vision, and predictive machine learning.</p>
+        <p>I turn experiments into measurable systems using rigorous evaluation, vector databases, FastAPI, Docker, and observability - with clear evidence of quality, latency, and reliability.</p>
+        <p>Alongside technical delivery, I founded and led Sufra Alqalam, a 110-member initiative awarded 5,000 JOD by the Jordanian Ministry of Culture.</p>
       </div>
       <div class="about-stats reveal">
-        <div class="stat-card"><div class="stat-num">ML</div><div class="stat-label">Machine Learning</div></div>
-        <div class="stat-card"><div class="stat-num">NLP</div><div class="stat-label">Natural Language Processing</div></div>
-        <div class="stat-card"><div class="stat-num">RAG</div><div class="stat-label">Retrieval-Augmented Gen.</div></div>
-        <div class="stat-card"><div class="stat-num">CV</div><div class="stat-label">Computer Vision</div></div>
+        <div class="stat-card"><div class="stat-num">22</div><div class="stat-label">Selected AI Projects</div></div>
+        <div class="stat-card"><div class="stat-num">95%</div><div class="stat-label">RAG QA Accuracy</div></div>
+        <div class="stat-card"><div class="stat-num">110</div><div class="stat-label">Members Led</div></div>
+        <div class="stat-card"><div class="stat-num">24W</div><div class="stat-label">Applied AI Program</div></div>
       </div>
     </div>
   </div>
@@ -609,8 +664,9 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <section id="projects">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-kicker">Selected Projects / 22</div>
-      <h2 class="section-title">Strongest work,<br>grouped by expertise</h2>
+      <div class="section-kicker">Project Portfolio</div>
+      <h2 class="section-title">Applied AI systems,<br>from research to production</h2>
+      <p class="section-summary">22 projects across LLM fine-tuning, retrieval, knowledge graphs, NLP, computer vision, predictive ML, and AI infrastructure - organized by specialization for fast review.</p>
     </div>
 
     <div class="phase-block reveal">
@@ -934,24 +990,28 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <section id="contact">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-kicker">Contact</div>
-      <h2 class="section-title">Let's build<br>something intelligent</h2>
+      <div class="section-kicker">Contact &amp; Availability</div>
+      <h2 class="section-title">Open to AI engineering<br>opportunities</h2>
     </div>
     <div class="contact-wrapper">
       <div class="contact-left reveal">
-        <p>Open to collaborations, research projects, and full-time opportunities in applied AI and machine learning. Feel free to reach out through any channel below.</p>
+        <p>Seeking AI Engineer roles where I can build and evaluate reliable LLM, retrieval, NLP, computer vision, and production ML systems. The fastest ways to reach me are below.</p>
         <div class="contact-links">
-          <a href="https://github.com/Marwan-ALMasrat" target="_blank" class="contact-item">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div>
-            <div class="ci-content"><div class="ci-label">GitHub</div><div class="ci-value">Marwan-ALMasrat</div></div>
-          </a>
-          <a href="https://www.linkedin.com/in/marwan-al-masrat" target="_blank" class="contact-item purple">
+          <a href="https://www.linkedin.com/in/marwan-al-masrat" target="_blank" rel="noopener noreferrer" class="contact-item purple">
             <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent2)" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
             <div class="ci-content"><div class="ci-label">LinkedIn</div><div class="ci-value">Marwan Al-Masrat</div></div>
+          </a>
+          <a href="https://github.com/Marwan-ALMasrat" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg></div>
+            <div class="ci-content"><div class="ci-label">GitHub</div><div class="ci-value">Marwan-ALMasrat</div></div>
           </a>
           <a href="mailto:masrat.marwan@gmail.com" class="contact-item pink">
             <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent3)" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <div class="ci-content"><div class="ci-label">Email</div><div class="ci-value">masrat.marwan@gmail.com</div></div>
+          </a>
+          <a href="tel:+962786834685" class="contact-item">
+            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.33 1.78.62 2.63a2 2 0 01-.45 2.11L8 9.73a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0122 16.92z"/></svg></div>
+            <div class="ci-content"><div class="ci-label">Phone</div><div class="ci-value">+962 78 683 4685</div></div>
           </a>
         </div>
       </div>
@@ -961,7 +1021,7 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
           <div class="orb-ring"></div>
           <div class="orb-ring"></div>
         </div>
-        <div class="orb-text">Available<br>for Work<span>→ AI / ML</span></div>
+        <div class="orb-text">Available<br>for Work<span>&rarr; AI / ML</span></div>
       </div>
     </div>
   </div>
@@ -969,7 +1029,7 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 
 <footer>
   <div class="container">
-    <p>© 2025 Marwan Al-Masrat &nbsp;·&nbsp; Designed with intention &nbsp;·&nbsp; Built with passion</p>
+    <p>&copy; 2026 Marwan Al-Masrat &nbsp;&middot;&nbsp; AI Engineer Portfolio &nbsp;&middot;&nbsp; Jordan</p>
   </div>
 </footer>
 

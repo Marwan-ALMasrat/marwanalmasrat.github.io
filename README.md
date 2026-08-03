@@ -1,19 +1,20 @@
 # Marwan Al-Masrat - AI Engineer Portfolio
 
-A focused portfolio of 12 applied AI projects spanning parameter-efficient LLM fine-tuning, agentic systems, retrieval-augmented generation, NLP evaluation, knowledge graphs, observability, computer vision, and predictive machine learning.
+A curated portfolio of 22 applied AI projects spanning parameter-efficient LLM fine-tuning, agentic systems, RAG and retrieval engineering, knowledge graphs, production AI services, observability, NLP evaluation, computer vision, deep learning, and predictive machine learning.
 
 **Live portfolio:** [marwan-almasrat.github.io/marwanalmasrat.github.io](https://marwan-almasrat.github.io/marwanalmasrat.github.io/)
 
-## Featured work
+## Project domains
 
-- **FIDIC LoRA Fine-Tuning** - reproducible LoRA/QLoRA adaptation and evaluation of Qwen2.5 for structured contract-clause summarization.
-- **FusionMind** - collaborative agentic AI customer-support platform built with hybrid RAG, Neo4j, controlled business actions, and a bounded agent loop.
-- **Multimodal Scientific RAG** - ColPali visual retrieval, semantic text retrieval, Weaviate hybrid search, and cross-encoder re-ranking.
-- **FastAPI Observability Stack** - request tracing, structured logging, Prometheus metrics, Grafana dashboards, grounding checks, and automated tests.
-- **NLP Evaluation Lab** - EM, Token-F1, ROUGE, faithfulness auditing, batch comparison, and fine-tuning decision support.
-- **Jordanian Football Object Detection** - domain-specific YOLOv8 training and full-video inference.
+- **Fine-Tuning & Agentic Systems** - FIDIC LoRA/QLoRA adaptation and the FusionMind bounded-agent platform.
+- **RAG & Retrieval Engineering** - multimodal RAG, hybrid search, query routing, cross-encoder re-ranking, and LangChain document QA.
+- **Knowledge Graphs & Semantic AI** - NL-to-Cypher, graph claim criticism, GraphRAG, and NL-to-SPARQL.
+- **AI Services, Orchestration & Reliability** - microservice coordination, distributed routing, Prometheus/Grafana observability, and load profiling.
+- **NLP Evaluation & Generative AI** - QA/summarization evaluation and large-scale customer-review reasoning.
+- **Computer Vision & Deep Learning** - YOLOv8 football detection and solar-power forecasting.
+- **Predictive ML & Model Selection** - churn comparison, nested cross-validation, and mobile behavior classification.
 
-The remaining selected projects cover LangChain RAG, GenAI review analysis, natural-language-to-SPARQL dispatch, solar-power forecasting, telecom-churn model comparison, and mobile-user behavior classification.
+The portfolio is ordered by technical strength and grouped by expertise. Each project links directly to its repository or completed implementation branch.
 
 ## Repository structure
 

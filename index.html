@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marwan Al-Masrat — AI Engineer</title>
-<meta name="description" content="AI Engineer portfolio featuring LoRA fine-tuning, agentic AI, RAG, NLP evaluation, knowledge graphs, observability, computer vision, and predictive ML.">
+<meta name="description" content="AI Engineer portfolio featuring 22 selected projects across LoRA fine-tuning, agentic AI, RAG, knowledge graphs, AI microservices, observability, NLP, computer vision, and predictive ML.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -349,6 +349,11 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
   font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800;
   margin-bottom: 1.5rem; padding-left: 1.2rem;
   border-left: 3px solid var(--accent); color: #fff;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+}
+.phase-count {
+  flex-shrink: 0; font-family: 'Space Mono', monospace; font-size: 0.58rem;
+  font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
 }
 .phase-desc {
   max-width: 760px; margin: -0.65rem 0 1.8rem 1.35rem;
@@ -364,7 +369,7 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
 .project-card {
   padding: 1.6rem; border: 1px solid var(--border); border-radius: 14px;
   background: rgba(5,12,26,0.7); backdrop-filter: blur(10px);
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; display: flex; flex-direction: column;
   transition: all 0.4s cubic-bezier(0.23,1,0.32,1); cursor: pointer;
 }
 .project-card.featured { border-color: rgba(0,210,255,0.24); background: linear-gradient(145deg, rgba(0,210,255,0.075), rgba(5,12,26,0.78) 42%); }
@@ -378,16 +383,15 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
 .project-card:hover { border-color: rgba(0,210,255,0.35); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow); }
 .project-card.purple:hover { border-color: rgba(123,47,255,0.35); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--glow2); }
 .project-card.purple::after { background: radial-gradient(circle at 50% 0%, rgba(123,47,255,0.08), transparent 70%); }
-.project-meta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 0.8rem; }
-.project-badge {
-  font-family: 'Space Mono', monospace; font-size: 0.56rem; letter-spacing: 0.1em;
-  text-transform: uppercase; padding: 0.22rem 0.48rem; border-radius: 999px;
-  color: var(--accent); border: 1px solid rgba(0,210,255,0.22); background: rgba(0,210,255,0.07);
+.project-number {
+  display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem;
+  font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.16em; color: var(--accent);
 }
-.project-badge.team { color: #c8a7ff; border-color: rgba(123,47,255,0.3); background: rgba(123,47,255,0.09); }
-.project-badge.cv { color: #ff8db7; border-color: rgba(255,47,123,0.3); background: rgba(255,47,123,0.08); }
+.project-number::after { content:''; width: 34px; height: 1px; background: linear-gradient(90deg, var(--accent), transparent); opacity: 0.55; }
+.project-card.purple .project-number { color: #b997ff; }
+.project-card.purple .project-number::after { background: linear-gradient(90deg, var(--accent2), transparent); }
 .project-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
-.project-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(232,240,255,0.55); margin-bottom: 1rem; }
+.project-desc { flex: 1; font-size: 0.85rem; line-height: 1.6; color: rgba(232,240,255,0.55); margin-bottom: 1rem; }
 .project-skills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 .skill-tag {
   font-family: 'Space Mono', monospace; font-size: 0.6rem; padding: 0.2rem 0.5rem;
@@ -395,13 +399,41 @@ section { padding: 7rem 0; position: relative; z-index: 2; }
   border-radius: 4px; color: var(--accent);
 }
 .skill-tag.purple { background: rgba(123,47,255,0.07); border-color: rgba(123,47,255,0.2); color: var(--accent2); }
-.project-link {
-  font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em;
-  color: var(--muted); text-decoration: none;
-  display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.3s;
+.repo-button {
+  margin-top: auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0.75rem;
+  padding: 0.72rem 0.78rem; border: 1px solid rgba(0,210,255,0.2); border-radius: 10px;
+  background: linear-gradient(135deg, rgba(0,210,255,0.08), rgba(123,47,255,0.055));
+  color: var(--text); text-decoration: none; overflow: hidden; position: relative;
+  transition: transform 0.3s, border-color 0.3s, background 0.3s, box-shadow 0.3s;
 }
-.project-link:hover { color: var(--accent); }
-.project-link svg { width: 12px; height: 12px; }
+.repo-button::before {
+  content:''; position:absolute; inset:0; transform: translateX(-105%); pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.07), transparent); transition: transform 0.5s;
+}
+.repo-button > * { position: relative; z-index: 1; }
+.repo-button:hover {
+  transform: translateY(-2px); border-color: rgba(0,210,255,0.58);
+  background: linear-gradient(135deg, rgba(0,210,255,0.14), rgba(123,47,255,0.1));
+  box-shadow: 0 10px 28px rgba(0,210,255,0.12);
+}
+.repo-button:hover::before { transform: translateX(105%); }
+.repo-mark {
+  width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center;
+  font-family: 'Space Mono', monospace; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.06em;
+  color: #03111c; background: var(--accent); box-shadow: 0 0 18px rgba(0,210,255,0.22);
+}
+.repo-copy { min-width: 0; display: flex; flex-direction: column; gap: 0.12rem; }
+.repo-copy strong { font-family: 'Space Mono', monospace; font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
+.repo-copy small { font-family: 'Space Mono', monospace; font-size: 0.54rem; letter-spacing: 0.07em; color: var(--muted); }
+.repo-arrow {
+  width: 27px; height: 27px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid rgba(0,210,255,0.22); color: var(--accent); transition: transform 0.3s, background 0.3s;
+}
+.repo-button:hover .repo-arrow { transform: translate(2px,-2px); background: rgba(0,210,255,0.1); }
+.project-card.purple .repo-button { border-color: rgba(123,47,255,0.24); background: linear-gradient(135deg, rgba(123,47,255,0.1), rgba(0,210,255,0.05)); }
+.project-card.purple .repo-button:hover { border-color: rgba(123,47,255,0.6); box-shadow: 0 10px 28px rgba(123,47,255,0.14); }
+.project-card.purple .repo-mark { background: #a87dff; box-shadow: 0 0 18px rgba(123,47,255,0.24); }
+.project-card.purple .repo-arrow { color: #b997ff; border-color: rgba(123,47,255,0.3); }
 .project-card .corner {
   position: absolute; top: 0; right: 0; width: 40px; height: 40px;
   border-left: 1px solid transparent; border-bottom: 1px solid transparent;
@@ -456,6 +488,7 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
   .about-grid, .contact-wrapper { grid-template-columns: 1fr; }
   .contact-visual { display: none; }
   .project-grid { grid-template-columns: 1fr; }
+  .phase-title { align-items: flex-start; }
   .about-stats { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
   .hero-name { font-size: clamp(2.8rem, 11vw, 4rem); }
@@ -463,6 +496,10 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 @media(max-width: 480px){
   .hero-name { font-size: clamp(2.2rem, 10vw, 3rem); }
   .cv-download { font-size: 0.6rem; padding: 0.7rem 1.2rem; }
+  .phase-title { flex-direction: column; gap: 0.35rem; font-size: 1.22rem; }
+  .phase-count { font-size: 0.54rem; }
+  .project-card { padding: 1.3rem; }
+  .repo-copy strong { font-size: 0.58rem; }
 }
 </style>
 </head>
@@ -572,134 +609,319 @@ footer p { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spac
 <section id="projects">
   <div class="container">
     <div class="section-header reveal">
-      <div class="section-kicker">Selected Projects / 12</div>
-      <h2 class="section-title">Strongest work,<br>grouped by system</h2>
+      <div class="section-kicker">Selected Projects / 22</div>
+      <h2 class="section-title">Strongest work,<br>grouped by expertise</h2>
     </div>
 
-    <!-- FEATURED AI SYSTEMS -->
     <div class="phase-block reveal">
-      <div class="phase-title">Featured AI Systems</div>
-      <p class="phase-desc">The most complete and technically ambitious work, ordered first: a reproducible fine-tuning lifecycle and a collaborative agentic platform.</p>
+      <div class="phase-title"><span>Fine-Tuning &amp; Agentic Systems</span><span class="phase-count">02 projects</span></div>
+      <p class="phase-desc">Flagship work first: a reproducible domain fine-tuning lifecycle and a collaborative agentic platform with controlled actions.</p>
       <div class="project-grid">
         <article class="project-card featured">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">01 / Latest</span><span class="project-badge">Fine-tuning</span></div>
+          <div class="project-number" aria-hidden="true">01</div>
           <div class="project-name">FIDIC LoRA Fine-Tuning</div>
           <div class="project-desc">Adapted Qwen2.5-1.5B-Instruct with LoRA/QLoRA to structure construction-contract obligations, risks, and deadlines. The V2 held-out run reached 0.544 ROUGE-1, 100% format compliance, and a 5% numeric hallucination rate.</div>
           <div class="project-skills"><span class="skill-tag">LoRA / QLoRA</span><span class="skill-tag">Qwen2.5</span><span class="skill-tag">PyTorch</span><span class="skill-tag">GGUF / Ollama</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/fidic-lora-finetuning" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/fidic-lora-finetuning" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore FIDIC LoRA Fine-Tuning on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card featured purple">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">02 / Featured</span><span class="project-badge team">Team project</span><span class="project-badge team">Team lead</span></div>
+          <div class="project-number" aria-hidden="true">02</div>
           <div class="project-name">FusionMind Agentic Support Platform</div>
           <div class="project-desc">A bounded agentic AI platform for e-commerce support, combining hybrid RAG, Neo4j, deterministic business rules, customer-scoped data, and confirmed actions. Led the project foundation, system architecture, task coordination, and agent orchestrator.</div>
           <div class="project-skills"><span class="skill-tag purple">Agentic AI</span><span class="skill-tag purple">Hybrid RAG</span><span class="skill-tag purple">Neo4j</span><span class="skill-tag purple">FastAPI</span></div>
-          <a href="https://github.com/capstone-group1-team3/main-repo" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View organization repo</a>
+          <a href="https://github.com/capstone-group1-team3/main-repo" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore FusionMind Agentic Support Platform on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
       </div>
     </div>
 
-    <!-- RETRIEVAL, KNOWLEDGE & PRODUCTION -->
     <div class="phase-block reveal">
-      <div class="phase-title" style="border-color:var(--accent3)">Retrieval, Knowledge &amp; Production</div>
-      <p class="phase-desc">Systems that retrieve evidence, query structured knowledge, expose AI capabilities through APIs, and make service behavior observable.</p>
+      <div class="phase-title" style="border-color:var(--accent3)"><span>RAG &amp; Retrieval Engineering</span><span class="phase-count">05 projects</span></div>
+      <p class="phase-desc">Retrieval systems ordered from full multimodal RAG through focused experiments in hybrid search, routing, re-ranking, and document QA.</p>
       <div class="project-grid">
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">03</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">03</div>
           <div class="project-name">Multimodal RAG for Scientific Papers</div>
           <div class="project-desc">Combined ColPali visual page retrieval with semantically chunked text, Weaviate hybrid search, and cross-encoder re-ranking. On a 20-question paper benchmark, answer accuracy improved from 80% to 95%.</div>
           <div class="project-skills"><span class="skill-tag">Weaviate</span><span class="skill-tag">ColPali</span><span class="skill-tag">Hybrid Search</span><span class="skill-tag">Streamlit</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/RAG_Weaviate" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/RAG_Weaviate" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Multimodal RAG for Scientific Papers on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">04</span><span class="project-badge cv">CV project</span><span class="project-badge">Completed branch</span></div>
-          <div class="project-name">FastAPI Monitoring &amp; Observability Stack</div>
-          <div class="project-desc">Instrumented an NLP, knowledge-graph, and RAG API with request IDs, structured JSON logs, Prometheus counters, latency histograms, in-flight gauges, a Grafana dashboard, grounding checks, and tests.</div>
-          <div class="project-skills"><span class="skill-tag">FastAPI</span><span class="skill-tag">Prometheus</span><span class="skill-tag">Grafana</span><span class="skill-tag">Docker</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/fastapi-monitoring-observability-stack/tree/add-grafana-observability" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View completed branch</a>
+          <div class="project-number" aria-hidden="true">04</div>
+          <div class="project-name">Hybrid Retrieval Benchmark</div>
+          <div class="project-desc">Benchmarked BM25, MiniLM dense, and Weaviate hybrid retrieval across factoid and paraphrastic queries using Recall@5, Recall@10, and MRR. Dense reached 0.900 Recall@5; hybrid reached 0.983 Recall@10.</div>
+          <div class="project-skills"><span class="skill-tag">Weaviate</span><span class="skill-tag">BM25</span><span class="skill-tag">MiniLM</span><span class="skill-tag">Recall / MRR</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m8-l8_Marwan-ALMasrat/tree/lab-vector-retrieval" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Hybrid Retrieval Benchmark on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">05</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">05</div>
+          <div class="project-name">Adaptive Query Router</div>
+          <div class="project-desc">Classifies factoid, paraphrastic, and mixed queries, then dispatches them to BM25, dense, or hybrid retrieval. The evaluated rules reached 85% routing accuracy and 0.93 Recall@5 on factoid queries.</div>
+          <div class="project-skills"><span class="skill-tag">Query Routing</span><span class="skill-tag">BM25</span><span class="skill-tag">Dense Retrieval</span><span class="skill-tag">Hybrid Search</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m8-s8_Marwan-ALMasrat/tree/stretch-query-router" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Adaptive Query Router on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">06</div>
+          <div class="project-name">Cross-Encoder Re-Ranking Benchmark</div>
+          <div class="project-desc">Added an MS MARCO MiniLM cross-encoder to a hybrid Weaviate pipeline and measured both retrieval quality and CPU latency. The study exposed a 194x overhead and documented when re-ranking should be reduced or skipped.</div>
+          <div class="project-skills"><span class="skill-tag">Cross-Encoder</span><span class="skill-tag">Re-Ranking</span><span class="skill-tag">Latency Profiling</span><span class="skill-tag">Weaviate</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m8-s28_Marwan-ALMasrat/tree/stretch-cross-encoder-rerank" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Cross-Encoder Re-Ranking Benchmark on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">07</div>
           <div class="project-name">AI RAG Assistant with LangChain</div>
           <div class="project-desc">Built a document-question-answering pipeline with PDF parsing, recursive chunking, IBM watsonx embeddings and generation, ChromaDB retrieval, and a Gradio upload-and-chat interface.</div>
           <div class="project-skills"><span class="skill-tag">LangChain</span><span class="skill-tag">IBM watsonx</span><span class="skill-tag">ChromaDB</span><span class="skill-tag">Gradio</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/RAG" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/RAG" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore AI RAG Assistant with LangChain on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+      </div>
+    </div>
+
+    <div class="phase-block reveal">
+      <div class="phase-title" style="border-color:var(--accent2)"><span>Knowledge Graphs &amp; Semantic AI</span><span class="phase-count">04 projects</span></div>
+      <p class="phase-desc">Schema-aware systems for translating language into graph queries, validating claims, combining graph structure with vectors, and querying RDF knowledge.</p>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">08</div>
+          <div class="project-name">Natural Language to Cypher Engine</div>
+          <div class="project-desc">A deterministic, schema-bounded mapper for 15 question shapes with intent detection, slot extraction, parameterized Cypher, Neo4j execution, and explicit rejection of unsupported requests.</div>
+          <div class="project-skills"><span class="skill-tag">Neo4j</span><span class="skill-tag">Cypher</span><span class="skill-tag">Intent Mapping</span><span class="skill-tag">Query Safety</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m9-i9b_Marwan/tree/integration-9b-nl-cypher" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Natural Language to Cypher Engine on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">06</span><span class="project-badge">Knowledge graph</span></div>
+          <div class="project-number" aria-hidden="true">09</div>
+          <div class="project-name">Knowledge Graph Claim Critic</div>
+          <div class="project-desc">A three-stage critic that labels claims as supported, entailed, contradicted, or unsupported using direct checks, hierarchy traversal, and schema constraints. It achieved perfect precision and recall on a 40-claim evaluation set.</div>
+          <div class="project-skills"><span class="skill-tag">Neo4j</span><span class="skill-tag">KG Reasoning</span><span class="skill-tag">Entailment</span><span class="skill-tag">Schema Validation</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m9-s9b_Marwan/tree/stretch-9b-tue-kg-critic" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Knowledge Graph Claim Critic on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">10</div>
+          <div class="project-name">GraphRAG Hybrid Retrieval</div>
+          <div class="project-desc">Combines a Neo4j vector index with one-hop graph expansion and structural score fusion. The pipeline reached 0.812 macro Recall@10 across the evaluation set while exposing where categorical graph signals improve vector search.</div>
+          <div class="project-skills"><span class="skill-tag">GraphRAG</span><span class="skill-tag">Neo4j Vector Index</span><span class="skill-tag">MiniLM</span><span class="skill-tag">Score Fusion</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m9-s29b_Marwan/tree/stretch-9b-thu-graphrag" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore GraphRAG Hybrid Retrieval on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">11</div>
           <div class="project-name">Natural Language to SPARQL Dispatcher</div>
           <div class="project-desc">Maps supported natural-language publication intents to auditable SPARQL queries and executes them against an RDF ontology hosted in Apache Jena Fuseki.</div>
           <div class="project-skills"><span class="skill-tag">SPARQL</span><span class="skill-tag">RDF</span><span class="skill-tag">Apache Jena</span><span class="skill-tag">Docker</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/SPARQL-CLI-Dispatcher" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/SPARQL-CLI-Dispatcher" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Natural Language to SPARQL Dispatcher on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
       </div>
     </div>
 
-    <!-- NLP EVALUATION & GENAI -->
     <div class="phase-block reveal">
-      <div class="phase-title" style="border-color:var(--accent2)">NLP Evaluation &amp; Generative AI</div>
-      <p class="phase-desc">Evaluation-first NLP work and an applied reasoning pipeline that turns large-scale customer feedback into structured recommendations.</p>
+      <div class="phase-title" style="border-color:var(--accent)"><span>AI Services, Orchestration &amp; Reliability</span><span class="phase-count">04 projects</span></div>
+      <p class="phase-desc">Production-oriented AI infrastructure covering service routing, failure isolation, distributed tracing, metrics, dashboards, and load profiling.</p>
+      <div class="project-grid">
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">12</div>
+          <div class="project-name">Multi-Service AI Coordinator</div>
+          <div class="project-desc">A Docker Compose system that classifies requests, fans out concurrently to NLP, knowledge-graph, and RAG services, aggregates responses, and degrades gracefully during partial failures. Its coordinator suite passes all six tests.</div>
+          <div class="project-skills"><span class="skill-tag">FastAPI</span><span class="skill-tag">Microservices</span><span class="skill-tag">AsyncIO</span><span class="skill-tag">Docker Compose</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m10-s210_three_Microservices/tree/stretch-10-thu-coordinator" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Multi-Service AI Coordinator on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">13</div>
+          <div class="project-name">Distributed AI Router &amp; Observability</div>
+          <div class="project-desc">A three-service FastAPI router with per-service Prometheus metrics, structured logs, and propagated request IDs. It classified all 15 held-out questions correctly and passed all 16 automated tests.</div>
+          <div class="project-skills"><span class="skill-tag">FastAPI</span><span class="skill-tag">Prometheus</span><span class="skill-tag">Request Tracing</span><span class="skill-tag">Service Routing</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m11-s211/tree/stretch-thu-observability-router" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Distributed AI Router &amp; Observability on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">14</div>
+          <div class="project-name">FastAPI Monitoring &amp; Observability Stack</div>
+          <div class="project-desc">Instrumented an NLP, knowledge-graph, and RAG API with request IDs, structured JSON logs, Prometheus counters, latency histograms, in-flight gauges, a Grafana dashboard, grounding checks, and tests.</div>
+          <div class="project-skills"><span class="skill-tag">FastAPI</span><span class="skill-tag">Prometheus</span><span class="skill-tag">Grafana</span><span class="skill-tag">Docker</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/fastapi-monitoring-observability-stack/tree/add-grafana-observability" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore FastAPI Monitoring &amp; Observability Stack on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">15</div>
+          <div class="project-name">AI Service Load Profiler</div>
+          <div class="project-desc">An HTTPX load generator that ramps concurrency, captures p50/p95/p99 and error rate, identifies the latency knee, and produces a chart-backed report. The measured knee appeared at load 5 after a 62.6% p95 increase.</div>
+          <div class="project-skills"><span class="skill-tag">HTTPX</span><span class="skill-tag">Load Testing</span><span class="skill-tag">p95 / p99</span><span class="skill-tag">Matplotlib</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/m11-s11/tree/stretch-tue-load-profiling" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore AI Service Load Profiler on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+      </div>
+    </div>
+
+    <div class="phase-block reveal">
+      <div class="phase-title" style="border-color:var(--accent2)"><span>NLP Evaluation &amp; Generative AI</span><span class="phase-count">02 projects</span></div>
+      <p class="phase-desc">Evaluation-first NLP work and an applied reasoning pipeline that converts large-scale customer feedback into structured recommendations.</p>
       <div class="project-grid">
         <article class="project-card purple">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">07</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">16</div>
           <div class="project-name">NLP Evaluation Lab</div>
           <div class="project-desc">Evaluates extractive QA and abstractive summarization with EM, Token-F1, ROUGE, normalization traces, batch comparisons, numeric-faithfulness checks, and an auditable fine-tune decision matrix.</div>
           <div class="project-skills"><span class="skill-tag purple">Transformers</span><span class="skill-tag purple">EM / F1</span><span class="skill-tag purple">ROUGE</span><span class="skill-tag purple">Streamlit</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/nlp-eval-lab" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/nlp-eval-lab" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore NLP Evaluation Lab on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card purple">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">08</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">17</div>
           <div class="project-name">GenAI Reasoning for Customer Reviews</div>
           <div class="project-desc">Analyzed more than 9,400 Yelp reviews through sentiment processing and a GenAI reasoning layer, then converted the findings into structured business insights with Arabic conversational analysis.</div>
           <div class="project-skills"><span class="skill-tag purple">NLP</span><span class="skill-tag purple">OpenRouter</span><span class="skill-tag purple">Prompt Engineering</span><span class="skill-tag purple">Data Analysis</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/GenAI_Reasoning_PromptEng" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/GenAI_Reasoning_PromptEng" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore GenAI Reasoning for Customer Reviews on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
       </div>
     </div>
 
-    <!-- VISION & PREDICTIVE ML -->
     <div class="phase-block reveal">
-      <div class="phase-title">Computer Vision &amp; Predictive ML</div>
-      <p class="phase-desc">Domain-specific vision, forecasting, model-selection, and behavior-classification work with measurable evaluation results.</p>
+      <div class="phase-title" style="border-color:var(--accent3)"><span>Computer Vision &amp; Deep Learning</span><span class="phase-count">02 projects</span></div>
+      <p class="phase-desc">Applied deep-learning work for domain-specific object detection and renewable-energy forecasting, each backed by measured outcomes.</p>
       <div class="project-grid">
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">09</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">18</div>
           <div class="project-name">Jordanian Football Object Detection</div>
           <div class="project-desc">Prepared and annotated roughly 300 match frames, fine-tuned YOLOv8 Medium and Large variants across multiple experiments, and ran full-video inference for players, balls, referees, and goalkeepers.</div>
           <div class="project-skills"><span class="skill-tag">YOLOv8</span><span class="skill-tag">Roboflow</span><span class="skill-tag">Ultralytics</span><span class="skill-tag">Video Inference</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/Computer-Vision-Based-Object-Detection-for-Jordanian-Football" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <a href="https://github.com/Marwan-ALMasrat/Computer-Vision-Based-Object-Detection-for-Jordanian-Football" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Jordanian Football Object Detection on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">10</span><span class="project-badge cv">CV project</span></div>
+          <div class="project-number" aria-hidden="true">19</div>
           <div class="project-name">Solar Power Generation Predictor</div>
-          <div class="project-desc">Engineered weather features and trained a Keras 128-64-1 regression network with early stopping, reaching R² 0.79 and RMSE 439.7 kW on held-out data, then deployed it with Streamlit.</div>
+          <div class="project-desc">Engineered weather features and trained a Keras 128-64-1 regression network with early stopping, reaching R-squared 0.79 and RMSE 439.7 kW on held-out data, then deployed it with Streamlit.</div>
           <div class="project-skills"><span class="skill-tag">TensorFlow</span><span class="skill-tag">Keras</span><span class="skill-tag">Feature Engineering</span><span class="skill-tag">Streamlit</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/DL_Projects/tree/main/DL_Reg_app" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View project folder</a>
+          <a href="https://github.com/Marwan-ALMasrat/DL_Projects/tree/main/DL_Reg_app" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Solar Power Generation Predictor on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
+      </div>
+    </div>
+
+    <div class="phase-block reveal">
+      <div class="phase-title" style="border-color:var(--accent)"><span>Predictive ML &amp; Model Selection</span><span class="phase-count">03 projects</span></div>
+      <p class="phase-desc">Classical machine-learning projects centered on honest evaluation, tuning, reproducible comparison, and interpretable performance diagnostics.</p>
+      <div class="project-grid">
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">11</span><span class="project-badge">Model selection</span></div>
+          <div class="project-number" aria-hidden="true">20</div>
           <div class="project-name">Telecom Churn Model Comparison CLI</div>
           <div class="project-desc">A production-style command-line tool that compares six model configurations with stratified cross-validation and saves metrics, diagnostic plots, and the best serialized model.</div>
-          <div class="project-skills"><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Cross-validation</span><span class="skill-tag">CLI</span><span class="skill-tag">Joblib</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/model-comparison-cli" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View repository</a>
+          <div class="project-skills"><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Cross-Validation</span><span class="skill-tag">CLI</span><span class="skill-tag">Joblib</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/model-comparison-cli" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Telecom Churn Model Comparison CLI on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         <article class="project-card">
           <div class="corner"></div>
-          <div class="project-meta"><span class="project-badge">12</span><span class="project-badge cv">CV experience</span></div>
+          <div class="project-number" aria-hidden="true">21</div>
+          <div class="project-name">Hyperparameter Tuning &amp; Nested CV</div>
+          <div class="project-desc">A Random Forest and Decision Tree study using GridSearchCV and nested cross-validation to separate tuning from honest evaluation. The selected forest scored 0.4899 inner-CV F1 versus 0.4806 on outer folds.</div>
+          <div class="project-skills"><span class="skill-tag">GridSearchCV</span><span class="skill-tag">Nested CV</span><span class="skill-tag">Random Forest</span><span class="skill-tag">Model Selection</span></div>
+          <a href="https://github.com/Marwan-ALMasrat/gridsearch-and-nested-cross-validation" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Hyperparameter Tuning &amp; Nested CV on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
+        </article>
+        <article class="project-card">
+          <div class="corner"></div>
+          <div class="project-number" aria-hidden="true">22</div>
           <div class="project-name">Mobile User Behavior Classifier</div>
           <div class="project-desc">Built a K-nearest-neighbors classifier for five mobile-usage behavior classes from 700 records, reaching 90.7% validation accuracy and a 90.7% F1-score.</div>
           <div class="project-skills"><span class="skill-tag">KNN</span><span class="skill-tag">Classification</span><span class="skill-tag">Pandas</span><span class="skill-tag">Model Evaluation</span></div>
-          <a href="https://github.com/Marwan-ALMasrat/Machine-Learning-Internships-Project/blob/main/User%20Behavior%20Dataset%20by%20Mobile%20Device%20Usage%20Model.ipynb" target="_blank" rel="noopener noreferrer" class="project-link"><span aria-hidden="true">&#8599;</span>View project notebook</a>
+          <a href="https://github.com/Marwan-ALMasrat/Machine-Learning-Internships-Project/blob/main/User%20Behavior%20Dataset%20by%20Mobile%20Device%20Usage%20Model.ipynb" target="_blank" rel="noopener noreferrer" class="repo-button" aria-label="Explore Mobile User Behavior Classifier on GitHub">
+            <span class="repo-mark" aria-hidden="true">GH</span>
+            <span class="repo-copy"><strong>Explore repository</strong><small>github.com</small></span>
+            <span class="repo-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
       </div>
     </div>
